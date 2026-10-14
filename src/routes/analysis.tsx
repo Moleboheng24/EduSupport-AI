@@ -43,7 +43,7 @@ function AnalysisPage() {
   const [running, setRunning] = useState(false);
 
   const run = () => {
-    if (draft.reviewScore >= draft.priorityScore) return toast.error("'Review suggested' score must be lower than 'Priority review' score.");
+    if (draft.reviewScore >= draft.priorityScore) { toast.error("'Review suggested' score must be lower than 'Priority review' score."); return; }
     setRunning(true);
     setTimeout(() => {
       store.setThresholds(draft);

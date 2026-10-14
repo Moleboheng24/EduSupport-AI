@@ -39,7 +39,7 @@ export function parseStudentsCsv(text: string): CsvResult {
   const warnings: string[] = [];
   const lines = text.replace(/\r/g, "").split("\n").filter((l) => l.trim() !== "");
   if (lines.length < 2) return { students: [], errors: ["The file has no data rows."], warnings };
-  const header = splitLine(lines[0]).map((h) => h.toLowerCase());
+  const header = splitLine(lines[0]!).map((h) => h.toLowerCase());
   const pii = header.filter((h) => FORBIDDEN.includes(h));
   if (pii.length) errors.push(`Remove personally identifiable columns before uploading: ${pii.join(", ")}.`);
   const missingCols = CSV_COLUMNS.filter((c) => !header.includes(c));
@@ -56,8 +56,8 @@ export function parseStudentsCsv(text: string): CsvResult {
     const cells = splitLine(line);
     const get = (c: string) => cells[idx(c)] ?? "";
     const id = get("student_id");
-    if (!id) return errors.push(`Row ${row}: student_id is empty.`);
-    if (seen.has(id)) return errors.push(`Row ${row}: duplicate student_id "${id}".`);
+    if (!id) { errors.push(`Row ${row}: student_id is empty.`); return; }
+    if (seen.has(id)) { errors.push(`Row ${row}: duplicate student_id "${id}".`); return; }
     seen.add(id);
     const num = (c: string, label: string): number | null => {
       const v = get(c);

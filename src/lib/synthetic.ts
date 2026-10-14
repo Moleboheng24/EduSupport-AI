@@ -32,7 +32,7 @@ export function generateSyntheticStudents(count = 120): Student[] {
       s < 0.1 ? "Active support" : s < 0.22 ? "Monitoring" : "None";
     const st: Student = {
       id: `STU-${1001 + i}`,
-      cohort: cohorts[i % 3],
+      cohort: cohorts[i % 3]!,
       attendance,
       completion,
       prevAvg,

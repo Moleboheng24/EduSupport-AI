@@ -115,7 +115,7 @@ function recommend(factors: Factor[], c: Category): Recommendation[] {
   if (att) recs.push({ type: "attendance-conversation", title: "Discuss possible attendance barriers privately", rationale: "Attendance can be affected by transport, health, caring duties or other circumstances.", basedOn: [att.observed] });
   if (comp || eng) recs.push({ type: "study-plan", title: "Co-create a study plan", rationale: "A structured plan can help with workload and re-engagement.", basedOn: [comp?.observed, eng?.observed].filter(Boolean) as string[] });
   if (dec || low) recs.push({ type: "tutoring", title: "Offer tutoring or additional learning resources", rationale: "Targeted support may help address gaps in recent assessments.", basedOn: [dec?.observed, low?.observed].filter(Boolean) as string[] });
-  if (dec) recs.push({ type: "follow-up-assessment", title: "Schedule a follow-up assessment", rationale: "Checks whether the decline persists and whether support is helping.", basedOn: [dec.observed] });
+  if (dec) recs.push({ type: "follow-up-assessment", title: "Schedule a follow-up assessment", rationale: "Checks whether the decline persists and whether support is helping.", basedOn: [dec!.observed] });
   const imp = has("improving");
   if (imp && recs.length === 0) recs.push({ type: "recognise-progress", title: "Recognise and encourage recent progress", rationale: "Positive feedback can reinforce improvement.", basedOn: [imp.observed] });
   return recs;

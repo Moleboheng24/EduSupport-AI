@@ -59,7 +59,7 @@ export const CATEGORY_COLOR: Record<Category, string> = {
   "No current concern": "var(--steady)",
 };
 
-export function StatCard({ label, value, hint, accent }: { label: string; value: ReactNode; hint?: string; accent?: string }) {
+export function StatCard({ label, value, hint, accent }: { label: string; value: ReactNode; hint?: string | undefined; accent?: string | undefined }) {
   return (
     <div className="rounded-lg border bg-card p-4">
       <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</div>

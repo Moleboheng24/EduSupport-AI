@@ -10,15 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ActionsRouteImport } from './routes/actions'
 import { Route as AnalysisRouteImport } from './routes/analysis'
+import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as InsightsRouteImport } from './routes/insights'
+import { Route as PresentationRouteImport } from './routes/presentation'
+import { Route as ResponsibleAiRouteImport } from './routes/responsible-ai'
 import { Route as StudentsIndexRouteImport } from './routes/students.index'
 import { Route as StudentsIdRouteImport } from './routes/students.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ActionsRoute = ActionsRouteImport.update({
@@ -31,9 +40,24 @@ const AnalysisRoute = AnalysisRouteImport.update({
   path: '/analysis',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArchitectureRoute = ArchitectureRouteImport.update({
+  id: '/architecture',
+  path: '/architecture',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InsightsRoute = InsightsRouteImport.update({
   id: '/insights',
   path: '/insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PresentationRoute = PresentationRouteImport.update({
+  id: '/presentation',
+  path: '/presentation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResponsibleAiRoute = ResponsibleAiRouteImport.update({
+  id: '/responsible-ai',
+  path: '/responsible-ai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StudentsIndexRoute = StudentsIndexRouteImport.update({
@@ -49,26 +73,38 @@ const StudentsIdRoute = StudentsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/actions': typeof ActionsRoute
   '/analysis': typeof AnalysisRoute
+  '/architecture': typeof ArchitectureRoute
   '/insights': typeof InsightsRoute
+  '/presentation': typeof PresentationRoute
+  '/responsible-ai': typeof ResponsibleAiRoute
   '/students/$id': typeof StudentsIdRoute
   '/students/': typeof StudentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/actions': typeof ActionsRoute
   '/analysis': typeof AnalysisRoute
+  '/architecture': typeof ArchitectureRoute
   '/insights': typeof InsightsRoute
+  '/presentation': typeof PresentationRoute
+  '/responsible-ai': typeof ResponsibleAiRoute
   '/students/$id': typeof StudentsIdRoute
   '/students': typeof StudentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/actions': typeof ActionsRoute
   '/analysis': typeof AnalysisRoute
+  '/architecture': typeof ArchitectureRoute
   '/insights': typeof InsightsRoute
+  '/presentation': typeof PresentationRoute
+  '/responsible-ai': typeof ResponsibleAiRoute
   '/students/$id': typeof StudentsIdRoute
   '/students/': typeof StudentsIndexRoute
 }
@@ -76,29 +112,50 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/actions'
     | '/analysis'
+    | '/architecture'
     | '/insights'
+    | '/presentation'
+    | '/responsible-ai'
     | '/students/$id'
     | '/students/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/actions' | '/analysis' | '/insights' | '/students/$id' | '/students'
+    | '/'
+    | '/about'
+    | '/actions'
+    | '/analysis'
+    | '/architecture'
+    | '/insights'
+    | '/presentation'
+    | '/responsible-ai'
+    | '/students/$id'
+    | '/students'
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/actions'
     | '/analysis'
+    | '/architecture'
     | '/insights'
+    | '/presentation'
+    | '/responsible-ai'
     | '/students/$id'
     | '/students/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ActionsRoute: typeof ActionsRoute
   AnalysisRoute: typeof AnalysisRoute
+  ArchitectureRoute: typeof ArchitectureRoute
   InsightsRoute: typeof InsightsRoute
+  PresentationRoute: typeof PresentationRoute
+  ResponsibleAiRoute: typeof ResponsibleAiRoute
   StudentsIdRoute: typeof StudentsIdRoute
   StudentsIndexRoute: typeof StudentsIndexRoute
 }
@@ -110,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/actions': {
@@ -126,11 +190,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnalysisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/architecture': {
+      id: '/architecture'
+      path: '/architecture'
+      fullPath: '/architecture'
+      preLoaderRoute: typeof ArchitectureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/insights': {
       id: '/insights'
       path: '/insights'
       fullPath: '/insights'
       preLoaderRoute: typeof InsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/presentation': {
+      id: '/presentation'
+      path: '/presentation'
+      fullPath: '/presentation'
+      preLoaderRoute: typeof PresentationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/responsible-ai': {
+      id: '/responsible-ai'
+      path: '/responsible-ai'
+      fullPath: '/responsible-ai'
+      preLoaderRoute: typeof ResponsibleAiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/students/': {
@@ -152,9 +237,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ActionsRoute: ActionsRoute,
   AnalysisRoute: AnalysisRoute,
+  ArchitectureRoute: ArchitectureRoute,
   InsightsRoute: InsightsRoute,
+  PresentationRoute: PresentationRoute,
+  ResponsibleAiRoute: ResponsibleAiRoute,
   StudentsIdRoute: StudentsIdRoute,
   StudentsIndexRoute: StudentsIndexRoute,
 }

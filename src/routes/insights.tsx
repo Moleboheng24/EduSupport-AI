@@ -27,7 +27,7 @@ function pearson(xs: number[], ys: number[]) {
   if (n < 3) return null;
   const mx = xs.reduce((a, b) => a + b, 0) / n, my = ys.reduce((a, b) => a + b, 0) / n;
   let num = 0, dx = 0, dy = 0;
-  for (let i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); dx += (xs[i] - mx) ** 2; dy += (ys[i] - my) ** 2; }
+  for (let i = 0; i < n; i++) { const a = xs[i]! - mx, b = ys[i]! - my; num += a * b; dx += a * a; dy += b * b; }
   return dx && dy ? Math.round((num / Math.sqrt(dx * dy)) * 100) / 100 : null;
 }
 const strength = (r: number | null) => r == null ? "not computable" : Math.abs(r) < 0.2 ? "weak" : Math.abs(r) < 0.5 ? "moderate" : "strong";
