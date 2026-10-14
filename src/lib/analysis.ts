@@ -93,7 +93,7 @@ function explain(s: Student, c: Category, factors: Factor[], missing: string[]):
     text = "Assessment results are trending upward. Recognising this progress may help sustain it.";
   } else {
     text = concerns.length
-      ? `One indicator is outside the reference range (${concerns[0].label.toLowerCase()}), but not enough to suggest a review under the current settings.`
+      ? `One indicator is outside the reference range (${concerns[0]!.label.toLowerCase()}), but not enough to suggest a review under the current settings.`
       : "No indicators are outside the configured reference ranges.";
   }
   if (missing.length) text += ` Note: ${missing.join(", ")} ${missing.length > 1 ? "are" : "is"} missing, so this interpretation is incomplete.`;
