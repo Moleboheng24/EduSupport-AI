@@ -57,13 +57,14 @@ function StudentsPage() {
       });
   }, [students, byId, q, cat, eng, status, sort]);
 
-  const onFile = async (f: File | undefined) => {
-    if (!f) return;
+  const onFile = async (f: File | undefined): Promise<unknown> => {
+    if (!f) return undefined;
     if (!f.name.toLowerCase().endsWith(".csv")) return toast.error("Please choose a .csv file.");
     if (f.size > 2_000_000) return toast.error("File is larger than 2 MB.");
     const text = await f.text();
     setPreview(parseStudentsCsv(text));
     if (fileRef.current) fileRef.current.value = "";
+    return undefined;
   };
 
   const SortHead = ({ k, label }: { k: SortKey; label: string }) => (
